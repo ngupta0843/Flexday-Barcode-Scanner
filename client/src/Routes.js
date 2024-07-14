@@ -1,15 +1,30 @@
 import axios from "axios";
 
-const url = "http://localhost:5000";
+// base url
+axios.defaults.baseURL = "http://localhost:5000";
 
-export const fetchData = () => axios.post(`${url}/api/request-api`);
+// adding token to header for every req
+axios.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      config.headers['Authorization'] = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
-export const sendQuestion = (question) => axios.post(`${url}/api/questions`, question);
+export const fetchData = () => axios.post(`/api/request-api`);
 
-export const sendProductdata = (barcode) => axios.post(`${url}/scanner/productData`, barcode);
+export const sendQuestion = (question) => axios.post(`/api/questions`, question);
 
-export const getIngredients = (ingredients, weights) => axios.post(`${url}/scanner/nutritionData`, {ingredients, weights});
+export const sendProductdata = (barcode) => axios.post(`/scanner/productData`, barcode);
 
-export const userLogin = (formData) => axios.post(`${url}/users/login`, formData);
+export const getIngredients = (ingredients, weights) => axios.post(`/scanner/nutritionData`, { ingredients, weights });
 
-export const userSignUp = (formData) => axios.post(`${url}/users/signup`, formData);
+export const userLogin = (formData) => axios.post(`/users/login`, formData);
+
+export const userSignUp = (formData) => axios.post(`/users/signup`, formData);
