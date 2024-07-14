@@ -14,7 +14,7 @@ import { Search } from "@mui/icons-material";
 
 import Scanner from "../scanner/Scanner";
 import Ingredients from "./Ingredients";
-import { sendProductdata, getIngredients } from "../../Routes";
+import { sendProductdata, getIngredients } from "../../routes/Routes";
 import { BarcodeContext } from "../contexts/Barcodecontext";
 
 const fetchNutritionData = async (ingredient, weight) => {

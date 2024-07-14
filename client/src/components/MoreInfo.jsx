@@ -10,7 +10,7 @@ import {
 import React, { useState, useContext, useEffect } from "react";
 import { Search } from "@mui/icons-material";
 import Ingredients from "./details/Ingredients";
-import { sendProductdata, getIngredients } from "../Routes";
+import { sendProductdata, getIngredients } from "../routes/Routes";
 import { BarcodeContext } from "./contexts/Barcodecontext";
 import { UPCcontext } from "./contexts/UPCcontext";
 
@@ -48,7 +48,7 @@ const calculateHealthScore = (nutrientData) => {
 export default function MoreInfo() {
   const { ingredients, setIngredients } = useContext(BarcodeContext);
   const [productInfo, setProductInfo] = useState(null);
-  const {upc, setUpc} = useContext(UPCcontext);
+  const { upc, setUpc } = useContext(UPCcontext);
 
   const isHealthy = (product) => {
     const ingredientsWithWeights = getIngredientWeights(product);
@@ -101,10 +101,10 @@ export default function MoreInfo() {
   };
 
   useEffect(() => {
-    if (upc){
+    if (upc) {
       handleDetectedBarcode(upc);
     }
-  }, [upc])
+  }, [upc]);
 
   return (
     <Card sx={{ borderRadius: 3, padding: 3 }}>

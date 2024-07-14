@@ -21,6 +21,7 @@ import { BarcodeProvider } from "./components/contexts/Barcodecontext";
 import { UserProvider } from "./components/contexts/UserContext";
 import SignUp from "./components/user/SignUp";
 import LogIn from "./components/user/LogIn";
+import ProtectedRoute from "./routes/ProtectedRoutes";
 
 function App() {
   const [mode, setMode] = useState(false);
@@ -96,51 +97,55 @@ function App() {
                   }}
                 >
                   <Routes>
-                    <Route
-                      path="/"
-                      element={
-                        <Grid
-                          container
-                          spacing={1}
-                          alignItems="center"
-                          justifyContent="center"
-                        >
+                    <Route path="/" element={<ProtectedRoute />}>
+                      <Route
+                        index
+                        element={
                           <Grid
-                            item
-                            xs={4}
-                            sx={{ display: "flex", justifyContent: "center" }}
+                            container
+                            spacing={1}
+                            alignItems="center"
+                            justifyContent="center"
                           >
-                            <Box sx={{ width: "50vh" }}>
-                              <ProductInfo />
-                            </Box>
+                            <Grid
+                              item
+                              xs={4}
+                              sx={{ display: "flex", justifyContent: "center" }}
+                            >
+                              <Box sx={{ width: "50vh" }}>
+                                <ProductInfo />
+                              </Box>
+                            </Grid>
+                            <Grid
+                              item
+                              xs={8}
+                              sx={{ display: "flex", justifyContent: "center" }}
+                            >
+                              <Box sx={{ width: "80%" }}>
+                                <Chatbot />
+                              </Box>
+                            </Grid>
                           </Grid>
-                          <Grid
-                            item
-                            xs={8}
-                            sx={{ display: "flex", justifyContent: "center" }}
-                          >
-                            <Box sx={{ width: "80%" }}>
-                              <Chatbot />
-                            </Box>
-                          </Grid>
-                        </Grid>
-                      }
-                    />
-                    <Route path="/history" element={<History />} />
+                        }
+                      />
+                    </Route>
+                    <Route path="/" element={<ProtectedRoute />}>
+                      <Route path="/history" element={<History />} />
+                      <Route path="/product-info" element={<MoreInfo />} />
+                      <Route
+                        path="/scanner"
+                        element={
+                          <Camera
+                            productInfo={productInfo}
+                            setProductInfo={setProductInfo}
+                            camera={camera}
+                            setCamera={setCamera}
+                          />
+                        }
+                      />
+                    </Route>
                     <Route path="/login" element={<LogIn />} />
                     <Route path="/signup" element={<SignUp />} />
-                    <Route path="/product-info" element={<MoreInfo />} />
-                    <Route
-                      path="/scanner"
-                      element={
-                        <Camera
-                          productInfo={productInfo}
-                          setProductInfo={setProductInfo}
-                          camera={camera}
-                          setCamera={setCamera}
-                        />
-                      }
-                    />
                   </Routes>
                 </Box>
               </ThemeProvider>

@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { TextField, Button, Container, Typography, Box } from "@mui/material";
 import { UserContext } from "../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
-import { userSignUp } from "../../Routes";
+import { userSignUp } from "../../routes/Routes";
 
 const SignUpPage = () => {
   const navigate = useNavigate();

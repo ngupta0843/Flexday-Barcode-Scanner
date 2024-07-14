@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 import { Box, Button, TextField, Typography } from "@mui/material";
-import { Scrollbars } from 'react-custom-scrollbars-2';
+import { Scrollbars } from "react-custom-scrollbars-2";
 
-import { fetchData, sendQuestion } from "../Routes";
+import { fetchData, sendQuestion } from "../routes/Routes";
 import { useConversations } from "../ConversationsContext";
 
 const Chatbot = () => {
-  const {conversations, setConversations} = useConversations();
+  const { conversations, setConversations } = useConversations();
   const [question, setQuestion] = useState("");
 
   const handleChange = (e) => {
     e.preventDefault();
     setQuestion(e.target.value);
     if (e.keyCode === 13) {
-        setQuestion(e.target.value);
+      setQuestion(e.target.value);
     }
   };
 
@@ -58,36 +58,36 @@ const Chatbot = () => {
       }}
     >
       <Typography variant="h6">Chat Bot</Typography>
-      <Scrollbars style={{ height:200}}>
-      <Box
-        sx={{
-          border: "1px solid",
-          borderColor: "divider",
-          padding: 2,
-          minHeight: 300,
-          maxHeight: "20vh",
-          borderRadius: 3,
-          backgroundColor: "background.component",
-        }}
-      >
-        {conversations.map((conv, idx) => (
-          <Box key={idx} sx={{ marginBottom: 2 }}>
-            <Typography sx={{ fontWeight: "bold" }}>
-              Q: {conv.question}
-            </Typography>
-            <Typography
-              sx={{
-                backgroundColor: "grey",
-                margin: "2vh",
-                borderRadius: "2vh",
-                padding: "2vh",
-              }}
-            >
-              A: {conv.answer}
-            </Typography>
-          </Box>
-        ))}
-      </Box>
+      <Scrollbars style={{ height: 200 }}>
+        <Box
+          sx={{
+            border: "1px solid",
+            borderColor: "divider",
+            padding: 2,
+            minHeight: 300,
+            maxHeight: "20vh",
+            borderRadius: 3,
+            backgroundColor: "background.component",
+          }}
+        >
+          {conversations.map((conv, idx) => (
+            <Box key={idx} sx={{ marginBottom: 2 }}>
+              <Typography sx={{ fontWeight: "bold" }}>
+                Q: {conv.question}
+              </Typography>
+              <Typography
+                sx={{
+                  backgroundColor: "grey",
+                  margin: "2vh",
+                  borderRadius: "2vh",
+                  padding: "2vh",
+                }}
+              >
+                A: {conv.answer}
+              </Typography>
+            </Box>
+          ))}
+        </Box>
       </Scrollbars>
       <TextField
         label="Your Question"
@@ -96,11 +96,7 @@ const Chatbot = () => {
         value={question}
         onChange={handleChange}
       />
-      <Button
-        variant="contained"
-        color="secondary"
-        onClick={handleClick}
-      >
+      <Button variant="contained" color="secondary" onClick={handleClick}>
         Send
       </Button>
     </Box>
