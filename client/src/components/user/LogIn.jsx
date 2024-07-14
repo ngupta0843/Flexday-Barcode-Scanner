@@ -32,7 +32,7 @@ const LoginPage = () => {
       setError({ hasError: false, message: "" });
       console.log(response.data);
       console.log("Login data submitted: ", formData);
-      login(response.data.token);
+      login(response.data.token, response.data.user);
       navigate("/");
       setFormData({ username: "", password: "" });
     } catch (error) {

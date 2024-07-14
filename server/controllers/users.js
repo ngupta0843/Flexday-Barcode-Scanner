@@ -56,8 +56,14 @@ async function signup(req, res) {
     const token = jwt.sign({ id: newUser.id }, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
+    const userData = {
+      id: newUser.id,
+      firstName: newUser.firstName,
+      lastName: newUser.lastName,
+      email: newUser.email,
+    }
     console.log('token created 2');
-    res.status(201).json({ message: "User created successfully", token });
+    res.status(201).json({ message: "User created successfully", token, userData });
   } catch (error) {
     console.log(error);
     res.status(500).send("Error creating the user.");

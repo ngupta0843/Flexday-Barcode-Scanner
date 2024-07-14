@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import {
   AppBar,
   Toolbar,
@@ -13,12 +13,12 @@ import { UserContext } from "./contexts/UserContext";
 import { useNavigate } from "react-router-dom";
 
 const Navbar = ({ mode, setMode }) => {
-  const { loggedIn, login, logout } = useContext(UserContext);
+  const { loggedIn, logout, userData } = useContext(UserContext);
   const navigate = useNavigate();
 
   const handleSignUp = () => {
     navigate("/signup");
-  }
+  };
 
   return (
     <div>
@@ -44,25 +44,28 @@ const Navbar = ({ mode, setMode }) => {
               Flexday
             </Link>
           </Typography>
-
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            {loggedIn ? (
-              <Button onClick={() => {
+          
+          {loggedIn ? (
+            <>
+              <Typography sx={{marginRight: 3}}>Welcome, {userData.firstName}</Typography>
+              <Button sx={{marginRight: 2}} onClick={() => {
                 logout();
                 navigate("/");
-              }}>Log Out</Button>
-            ) : (
-              <div>
-                <Button onClick={() => {
-                  navigate("/login");
-                }}>Log In</Button>
-                or
-                <Button onClick={handleSignUp}>
-                  Sign Up
-                </Button>
-              </div>
-            )}
-          </Typography>
+              }}>
+                Log Out
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button sx={{marginRight: 3}} onClick={() => navigate("/login")}>
+                Log In
+              </Button>
+              <Button sx={{marginRight: 3}} onClick={handleSignUp}>
+                Sign Up
+              </Button>
+            </>
+          )}
+          
           <Switch checked={mode} onChange={() => setMode(!mode)} />
         </Toolbar>
       </AppBar>

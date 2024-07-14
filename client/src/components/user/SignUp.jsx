@@ -27,10 +27,11 @@ const SignUpPage = () => {
     e.preventDefault();
     try {
       const response = await userSignUp(formData);
-      console.log(response.data);
-      console.log("Form data submitted: ", formData);
-      console.log(response.data.token)
-      login(response.data.token);
+      // console.log(response.data);
+      // console.log("Form data submitted: ", formData);
+      // console.log(response.data.token);
+      // console.log('user data: ', response.data.userData);
+      login(response.data.token, response.data.userData);
       navigate("/");
       setFormData({
         firstName: "",
@@ -40,12 +41,18 @@ const SignUpPage = () => {
         password: "",
       });
     } catch (error) {
-      switch (error.response.status) {
-        case 400:
-          alert("User already exists");
-          break;
-        default:
-          console.log(error);
+      if (error.response) {
+        switch (error.response.status) {
+          case 400:
+            alert("User already exists");
+            break;
+          default:
+            console.log(error);
+            break;
+        }
+      } else {
+        console.log(error.message);
+        alert("An error occured. Please try again. ");
       }
     }
   };
