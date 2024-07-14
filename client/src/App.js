@@ -1,5 +1,4 @@
 import {
-  Paper,
   ThemeProvider,
   createTheme,
   Grid,
@@ -22,6 +21,8 @@ import { UserProvider } from "./components/contexts/UserContext";
 import SignUp from "./components/user/SignUp";
 import LogIn from "./components/user/LogIn";
 import ProtectedRoute from "./routes/ProtectedRoutes";
+import Home from "./components/Home";
+import NotFound from "./components/NotFound";
 
 function App() {
   const [mode, setMode] = useState(false);
@@ -144,8 +145,10 @@ function App() {
                         }
                       />
                     </Route>
+                    <Route path="/home" element={<Home />} />
                     <Route path="/login" element={<LogIn />} />
                     <Route path="/signup" element={<SignUp />} />
+                    <Route path="*" element={<NotFound />} />
                   </Routes>
                 </Box>
               </ThemeProvider>

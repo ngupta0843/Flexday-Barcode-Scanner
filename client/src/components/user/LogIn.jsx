@@ -5,7 +5,7 @@ import { UserContext } from "../contexts/UserContext";
 import { userLogin } from "../../routes/Routes";
 
 const LoginPage = () => {
-  const { loggedIn, login } = useContext(UserContext);
+  const { login } = useContext(UserContext);
   const navigate = useNavigate();
   const [error, setError] = useState({
     hasError: false,
